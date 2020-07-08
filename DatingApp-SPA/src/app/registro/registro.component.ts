@@ -18,7 +18,7 @@ export class RegistroComponent implements OnInit {
     this.authService.register(this.model).subscribe(() => {
       console.log('cadastro sucesso');
     }, error => {
-      console.log('cadastro falha');
+      console.log(error);
     })
   }
 
