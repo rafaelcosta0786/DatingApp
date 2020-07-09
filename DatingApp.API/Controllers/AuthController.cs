@@ -35,7 +35,7 @@ namespace DatingApp.API.Controllers
             if (await _repo.UserExists(userDto.Username))
                 return BadRequest("Usuário já existe");
 
-            var userToCreate = new User
+            var userToCreate = new Users
             {
                 Username = userDto.Username,
             };
