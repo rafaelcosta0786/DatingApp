@@ -12,6 +12,11 @@ import { RegistroComponent } from './registro/registro.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MemberListComponent } from './member-list/member-list.component';
+import { ListsComponent } from './lists/lists.component';
+import { MessagesComponent } from './messages/messages.component';
+import { RouterModule } from '@angular/router';
+import { appRoutes } from './routes';
 
 @NgModule({
   declarations: [
@@ -20,8 +25,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavComponent,
     HomeComponent,
     RegistroComponent,
+    MemberListComponent,
+    ListsComponent,
+    MessagesComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot(appRoutes),
+  ],
   providers: [AuthService, ErrorInterceptorProvider],
   bootstrap: [AppComponent],
 })
