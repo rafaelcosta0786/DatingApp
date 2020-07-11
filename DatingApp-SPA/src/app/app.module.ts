@@ -21,6 +21,7 @@ import { appRoutes } from './routes';
 import { AuthInterceptor } from './auth.interceptor';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -45,6 +46,7 @@ export function tokenGetter() {
     FormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
+    BsDropdownModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter,
