@@ -20,7 +20,7 @@ export class RegistroComponent implements OnInit {
       this.alertify.success('Cadastro inserido com sucesso');
     }, error => {
       this.alertify.error(error);
-    })
+    });
   }
 
   cancel() {

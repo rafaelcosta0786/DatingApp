@@ -26,6 +26,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { MemberPhotoGalleryComponent } from './members/member-photo-gallery/member-photo-gallery.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -41,6 +43,7 @@ export function tokenGetter() {
     MemberListComponent,
     MemberCardComponent,
     MemberDetailComponent,
+    MemberPhotoGalleryComponent,
     ListsComponent,
     MessagesComponent,
   ],
@@ -51,6 +54,7 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
     BsDropdownModule.forRoot(),
+    NgxGalleryModule,
     TabsModule.forRoot(),
     JwtModule.forRoot({
       config: {
