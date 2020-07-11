@@ -25,6 +25,7 @@
     "bootstrap": "^4.5.0",
     "bootswatch": "^4.5.0",
     "font-awesome": "^4.7.0",
+    "guard": "^0.1.2",
     "jquery": "^3.5.1",
     "ngx-bootstrap": "^5.6.1",
     "rxjs": "~6.5.4",

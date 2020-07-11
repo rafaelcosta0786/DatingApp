@@ -28,6 +28,9 @@ import { UserService } from './_services/user.service';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { MemberPhotoGalleryComponent } from './members/member-photo-gallery/member-photo-gallery.component';
+import { MembersEditComponent } from './members/members-edit/members-edit.component';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -46,6 +49,7 @@ export function tokenGetter() {
     MemberPhotoGalleryComponent,
     ListsComponent,
     MessagesComponent,
+    MembersEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +74,10 @@ export function tokenGetter() {
     AlertifyService,
     AuthGuard,
     UserService,
-    MemberDetailResolver
+    MemberDetailResolver,
+    MemberEditResolver,
+    PreventUnsavedChangesGuard
+    
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
