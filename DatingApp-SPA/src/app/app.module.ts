@@ -31,6 +31,7 @@ import { MemberPhotoGalleryComponent } from './members/member-photo-gallery/memb
 import { MembersEditComponent } from './members/members-edit/members-edit.component';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -46,10 +47,11 @@ export function tokenGetter() {
     MemberListComponent,
     MemberCardComponent,
     MemberDetailComponent,
+    MembersEditComponent,
     MemberPhotoGalleryComponent,
+    PhotoEditorComponent,
     ListsComponent,
     MessagesComponent,
-    MembersEditComponent,
   ],
   imports: [
     BrowserModule,
