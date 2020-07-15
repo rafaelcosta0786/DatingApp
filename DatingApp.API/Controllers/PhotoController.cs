@@ -110,7 +110,7 @@ namespace DatingApp.API.Controllers
             photoToCreateDto.PublicId = uploadResult.PublicId;
 
             var photo = _mapper.Map<Photo>(photoToCreateDto);
-            if (!userFromRepo.Photos.Any(u => u.IsMain))
+            if (userFromRepo.Photos == null || !userFromRepo.Photos.Any(u => u.IsMain))
                 photo.IsMain = true;
 
             userFromRepo.Photos.Add(photo);

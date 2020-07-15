@@ -58,7 +58,6 @@ export class PhotoEditorComponent implements OnInit {
             p.isMain = false;
           });
           photo.isMain = true;
-          this.getMemberPhotoChange.emit(photo.url);
           this.authService.changeMemberPhoto(photo.url);
           this.authService.currentUser.photoUrl = photo.url;
           localStorage.setItem(
@@ -81,7 +80,7 @@ export class PhotoEditorComponent implements OnInit {
     this.uploader = new FileUploader({
       url:
         this.baseUrl +
-        'user/' +
+        'users/' +
         this.authService.decodedToken.nameid +
         '/photos',
       authToken: 'Bearer ' + localStorage.getItem('token'),
@@ -108,6 +107,14 @@ export class PhotoEditorComponent implements OnInit {
         };
 
         this.photos.push(photo);
+        if (photo.isMain) {
+          this.authService.changeMemberPhoto(photo.url);
+          this.authService.currentUser.photoUrl = photo.url;
+          localStorage.setItem(
+            'user',
+            JSON.stringify(this.authService.currentUser)
+          );
+        }
       }
     };
   }
