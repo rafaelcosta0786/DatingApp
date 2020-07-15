@@ -34,7 +34,7 @@ import { MembersEditComponent } from './members/members-edit/members-edit.compon
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
-
+import { TimeagoModule } from 'ngx-timeago';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -68,6 +68,7 @@ export function tokenGetter() {
     RouterModule.forRoot(appRoutes),
     BsDropdownModule.forRoot(),
     NgxGalleryModule,
+    TimeagoModule.forRoot(),
     TabsModule.forRoot(),
     JwtModule.forRoot({
       config: {
