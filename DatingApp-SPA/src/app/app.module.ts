@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -69,12 +70,13 @@ export function tokenGetter() {
     BsDropdownModule.forRoot(),
     NgxGalleryModule,
     TimeagoModule.forRoot(),
+    PaginationModule.forRoot(),
     TabsModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter,
         whitelistedDomains: ['localhost:5000'],
-        blacklistedRoutes: ['localhost:5000/api/auth']
+        blacklistedRoutes: ['localhost:5000/api/auth'],
       },
     }),
   ],
@@ -86,7 +88,7 @@ export function tokenGetter() {
     UserService,
     MemberDetailResolver,
     MemberEditResolver,
-    PreventUnsavedChangesGuard
+    PreventUnsavedChangesGuard,
   ],
   bootstrap: [AppComponent],
 })
