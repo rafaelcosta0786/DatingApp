@@ -18,6 +18,8 @@ namespace DatingApp.API.Request
     public int MaxAge { get; set; } = 99;
 
     public string OrderBy { get; set; } = "lastActived";
+    public bool LikeUserOrigin { get; set; } = false;
+    public bool LikeUserDestiny { get; set; } = false;
 
   }
 }
