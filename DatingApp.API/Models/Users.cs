@@ -25,6 +25,8 @@ namespace DatingApp.API.Models
 
         public ICollection<LikeUser> LikeOriginUsers { get; set; }
         public ICollection<LikeUser> LikeDestinyUsers { get; set; }
+        public ICollection<Message> MessageSent { get; set; }
+        public ICollection<Message> MessageReceived { get; set; }
 
     }
 }

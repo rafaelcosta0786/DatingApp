@@ -33,6 +33,40 @@ namespace DatingApp.API.Data
       return await _context.LikeUser.FirstOrDefaultAsync(u => u.LikeOriginUserId == userId && u.LikeDestinyUserId == recipientId);
     }
 
+    public async Task<Message> GetMessage(int id)
+    {
+      return await _context.Message.FirstOrDefaultAsync(x => x.Id == id);
+    }
+
+    public async Task<PagedList<Message>> GetMessagesForUser(MessageRequest request)
+    {
+      var messages = _context.Message
+        .Include(u => u.Sender).ThenInclude(i => i.Photos)
+        .Include(u => u.Recipient).ThenInclude(i => i.Photos)
+        .AsQueryable();
+
+      switch (request.MessageContainer)
+      {
+        case "Inbox":
+          messages = messages.Where(x => x.RecipientId == request.UserId);
+          break;
+        case "Outbox":
+          messages = messages.Where(x => x.SenderId == request.UserId);
+          break;
+        default:
+          messages = messages.Where(x => x.RecipientId == request.UserId && x.IsRead == false);
+          break;
+      }
+
+      messages = messages.OrderByDescending(x => x.MessageSent);
+      return await PagedList<Message>.CreateAsync(messages, request.PageNumber, request.PageSize);
+    }
+
+    public Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId)
+    {
+      throw new NotImplementedException();
+    }
+
     public async Task<Photo> GetPhoto(int id)
     {
       return await _context.Photo.FirstOrDefaultAsync(x => x.Id == id);
