@@ -12,7 +12,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
-export class ListsResolver implements Resolve<Users> {
+export class ListsResolver implements Resolve<Users[]> {
   pageNumber = 1;
   pageSize = 5;
   likesParam = 'LikeUserOrigin';

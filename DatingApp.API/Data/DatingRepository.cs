@@ -48,13 +48,13 @@ namespace DatingApp.API.Data
       switch (request.MessageContainer)
       {
         case "Inbox":
-          messages = messages.Where(x => x.RecipientId == request.UserId);
+          messages = messages.Where(x => x.RecipientId == request.UserId && x.RecipientDeleted == false);
           break;
         case "Outbox":
-          messages = messages.Where(x => x.SenderId == request.UserId);
+          messages = messages.Where(x => x.SenderId == request.UserId && x.SenderDeleted == false);
           break;
         default:
-          messages = messages.Where(x => x.RecipientId == request.UserId && x.IsRead == false);
+          messages = messages.Where(x => x.RecipientId == request.UserId && x.RecipientDeleted == false && x.IsRead == false);
           break;
       }
 
@@ -62,9 +62,18 @@ namespace DatingApp.API.Data
       return await PagedList<Message>.CreateAsync(messages, request.PageNumber, request.PageSize);
     }
 
-    public Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId)
+    public async Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId)
     {
-      throw new NotImplementedException();
+      var messages = await _context.Message
+        .Include(u => u.Sender).ThenInclude(i => i.Photos)
+        .Include(u => u.Recipient).ThenInclude(i => i.Photos)
+        .Where(x =>
+        (x.RecipientId == userId && x.RecipientDeleted == false && x.SenderId == recipientId)
+        || (x.RecipientId == recipientId && x.SenderId == userId && x.SenderDeleted == false))
+        .OrderByDescending(x => x.MessageSent)
+        .ToListAsync();
+
+      return messages;
     }
 
     public async Task<Photo> GetPhoto(int id)
